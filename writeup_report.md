@@ -20,7 +20,7 @@ epsi_t+1 = psi_t - psi_des_t + v_t / Lf * delta_t * dt
 If the dt is small, you get finer resolution. We predict N*dt seconds in the future, and larger this value more correct controling. However, it is very expensive computationally when the N is too large.
 
 ## Fitting waypoints
-I transformed coordination from global to local(vehicle). After this transformation px, py and psi are all 0.
+I transformed coordination from global to local(vehicle). 
 ```
 for (int i = 0; i < ptsx.size(); i++) {
   double shift_x = ptsx[i] - px; 
@@ -29,7 +29,7 @@ for (int i = 0; i < ptsx.size(); i++) {
   ptsy[i] = (shift_x * sin(0 - psi) + shift_y * cos(0 - psi));
 }
 ```
-
+After this transformation px, py and psi are all 0.
 
 ## latency handling
 ```
