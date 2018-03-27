@@ -91,6 +91,8 @@ int main() {
           double py = j[1]["y"];
           double psi = j[1]["psi"]; // angle
           double v = j[1]["speed"];
+          double a = j[1]["throttle"];
+          double delta = j[1]["steering_angle"];
 
           /*
           * TODO: Calculate steering angle and throttle using MPC.
@@ -104,7 +106,14 @@ int main() {
             ptsx[i] = (shift_x * cos(0 - psi) - shift_y * sin(0 - psi));
             ptsy[i] = (shift_x * sin(0 - psi) + shift_y * cos(0 - psi));
           }
+
           px = py = psi = 0.0;
+          double latency = 0.1;
+          double Lf = 2.67;
+          px = px + v*cos(psi)*latency;
+          py = py + v*sin(psi)*latency;
+          psi = psi - v*delta/Lf*latency;
+          v = v + a*latency;
 
           Eigen::Map<Eigen::VectorXd> ptsx_transform(ptsx.data(), ptsx.size());
           Eigen::Map<Eigen::VectorXd> ptsy_transform(ptsy.data(), ptsy.size());
