@@ -1,6 +1,6 @@
 # MPC Model
 * 모델예측제어(MPC, Model Predictive Control): 
- ** 적절한 cost function과 constraints를 이용해 최적화를 실행하여 자동차의 vehicle 모델에 대한 상태변수나 출력을 예측하는 과정
+  * 적절한 cost function과 constraints를 이용해 최적화를 실행하여 자동차의 vehicle 모델에 대한 상태변수나 출력을 예측하는 과정
 
 ## state & actuators
 state: [x, y, psi, velocity, cross_trac_error, psi_error]
