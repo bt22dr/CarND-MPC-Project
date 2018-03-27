@@ -108,19 +108,21 @@ int main() {
           }
 
           px = py = psi = 0.0;
-          double latency = 0.1;
-          double Lf = 2.67;
-          px = px + v*cos(psi)*latency;
-          py = py + v*sin(psi)*latency;
-          psi = psi - v*delta/Lf*latency;
-          v = v + a*latency;
-
+          
           Eigen::Map<Eigen::VectorXd> ptsx_transform(ptsx.data(), ptsx.size());
           Eigen::Map<Eigen::VectorXd> ptsy_transform(ptsy.data(), ptsy.size());
           auto coeffs = polyfit(ptsx_transform, ptsy_transform, 3);
           double cte = polyeval(coeffs, 0);
           // double epsi = psi - atan(coeffs[1] + 2 * px * coeffs[2] + 3 * coeffs[3] * pow(px, 2));
           double epsi = -atan(coeffs[1]);
+
+          double latency = 0.1;
+          double Lf = 2.67;
+          px = px + v*cos(psi)*latency;
+          py = py + v*sin(psi)*latency; // 0
+          cte = cte - v*sin(epsi)*latency; // 0
+          psi = psi - v*delta/Lf*latency;
+          v = v + a*latency;
 
           Eigen::VectorXd state(6);
           state << px, py, psi, v, cte, epsi;
