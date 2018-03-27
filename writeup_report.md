@@ -4,6 +4,7 @@
 
 ## state & actuators
 state: [x, y, psi, velocity, cross_trac_error, psi_error]
+
 actuators: [steering_angle, acceleration]
 
 ## update equations
